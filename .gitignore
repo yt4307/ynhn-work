@@ -1,0 +1,113 @@
+# ========================
+# 🌐 Global ignores
+# ========================
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Node logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Env files (common)
+.env
+.env.*.local
+.env.local
+.env.production
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Logs
+logs
+*.log
+*.log.*
+*.out
+*.pid
+*.seed
+
+# ========================
+# 📁 Frontend (Next.js)
+# ========================
+
+# Next.js build output
+.next/
+out/
+
+# Vite/Turbopack artifacts (future-proof)
+.next-turbo/
+.turbo/
+
+# Node modules
+node_modules/
+
+# TypeScript build
+*.tsbuildinfo
+
+# Pnpm store
+.pnpm-store/
+
+# ESLint cache
+.eslintcache
+
+# Editor settings
+.vscode/
+.idea/
+
+# ========================
+# 🐘 Backend (PHP + Slim)
+# ========================
+
+# Composer vendor
+backend/vendor/
+
+# Composer lock backup
+composer.lock.*
+composer.phar
+
+# PHPStorm / PHP configs
+backend/.phpunit.result.cache
+backend/.php_cs.cache
+backend/.php-cs-fixer.cache
+
+# Slim / PHP generated cache
+backend/cache/
+backend/storage/
+backend/.cache/
+backend/tmp/
+
+# SQL exports / dumps
+*.sql
+*.sql.gz
+
+# ========================
+# 🔧 Common build artifacts
+# ========================
+
+dist/
+build/
+coverage/
+
+# ========================
+# 📦 Temporary
+# ========================
+
+tmp/
+temp/
+*.tmp
+
+# ========================
+# ✨ Local runtime data
+# ========================
+
+*.local
+*.bak
+*.swp
+*.swo

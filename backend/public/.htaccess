@@ -1,0 +1,20 @@
+# 이 디렉토리의 기본 파일 우선순위를 SPA로
+DirectoryIndex assets/index.html index.php
+
+Options -MultiViews
+RewriteEngine On
+
+# 1) /api 로 시작하는 요청은 Slim (index.php) 로 보냄
+RewriteRule ^api(/.*)?$ index.php [QSA,L]
+
+# 2) 실제 존재하는 파일이면 그대로 서빙 (js/css/img 등)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# 3) 실제 존재하는 디렉토리이면서, 루트(/)가 아닌 경우는 그대로 서빙
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^ - [L]
+
+# 4) 그 외 나머지 모든 요청은 SPA 엔트리(assets/index.html)로
+RewriteRule ^.*$ assets/index.html [QSA,L]

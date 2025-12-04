@@ -1,0 +1,35 @@
+php_value display_errors Off
+php_value mbstring.http_input auto
+php_value date.timezone Asia/Seoul
+
+# Authorization 헤더 인식
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# 디렉터리 인덱스 비활성화 (목록 보기 방지)
+Options -Indexes
+
+# Rewrite 활성화
+RewriteEngine On
+
+# MultiViews 옵션 비활성화
+Options -MultiViews
+
+# 경로로 디렉터리만 선택됐을 경우 기본적으로 서빙하는 파일 순서
+DirectoryIndex index.html index.php
+
+# 보안: 중요한 내부 폴더 접근 차단
+RedirectMatch 403 ^/vendor/
+RedirectMatch 403 ^/src/
+RedirectMatch 403 ^/composer\.(json|lock)$
+RedirectMatch 403 ^/\.env
+RedirectMatch 403 ^/\.env\.production
+
+# 쿼리 스트링에 i=숫자가 있을 때 이를 제거하고 동일한 경로로 301 리디렉션
+RewriteCond %{QUERY_STRING} (^|&)i=[0-9]+(&|$)
+RewriteRule ^(.*)$ /$1? [R=301,L]
+
+# 이미 /public 로 시작하는 요청은 그대로 둔다
+RewriteCond %{REQUEST_URI} !^/public/
+
+# 나머지는 전부 public/ 밑으로 보낸다
+RewriteRule ^(.*)$ public/$1 [L,QSA]
