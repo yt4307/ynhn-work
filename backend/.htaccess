@@ -7,29 +7,39 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 # 디렉터리 인덱스 비활성화 (목록 보기 방지)
 Options -Indexes
+Options -MultiViews
 
 # Rewrite 활성화
 RewriteEngine On
 
-# MultiViews 옵션 비활성화
-Options -MultiViews
-
-# 경로로 디렉터리만 선택됐을 경우 기본적으로 서빙하는 파일 순서
+# 루트 기준 인덱스 파일 우선순위
 DirectoryIndex index.html index.php
 
-# 보안: 중요한 내부 폴더 접근 차단
+# ===== 보안: 내부 폴더 접근 차단 (root / public 양쪽 다 감안) =====
 RedirectMatch 403 ^/vendor/
 RedirectMatch 403 ^/src/
 RedirectMatch 403 ^/composer\.(json|lock)$
 RedirectMatch 403 ^/\.env
 RedirectMatch 403 ^/\.env\.production
+RedirectMatch 403 ^/public/vendor/
+RedirectMatch 403 ^/public/src/
 
 # 쿼리 스트링에 i=숫자가 있을 때 이를 제거하고 동일한 경로로 301 리디렉션
 RewriteCond %{QUERY_STRING} (^|&)i=[0-9]+(&|$)
 RewriteRule ^(.*)$ /$1? [R=301,L]
 
-# 이미 /public 로 시작하는 요청은 그대로 둔다
-RewriteCond %{REQUEST_URI} !^/public/
+# ===== 1) /api/* 요청은 Slim (public/index.php) 로 보냄 =====
+RewriteRule ^api(/.*)?$ public/index.php [QSA,L]
 
-# 나머지는 전부 public/ 밑으로 보낸다
-RewriteRule ^(.*)$ public/$1 [L,QSA]
+# ===== 2) public 밑에 "실제 파일"이 있으면 그대로 서빙 =====
+#   예: /_next/... , /favicon.ico , /assets/img.png
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+RewriteRule ^(.*)$ public/$1 [L]
+
+# ===== 3) public 밑에 "실제 디렉터리"가 있으면 그대로 서빙 =====
+#   예: /works  -> /public/works/  (trailingSlash: true 로 works/index.html 있음)
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -d
+RewriteRule ^(.*)$ public/$1/ [L]
+
+# ===== 4) 그 외 나머지 모든 요청은 SPA 엔트리 (public/index.html)로 =====
+RewriteRule ^.*$ public/index.html [L]
