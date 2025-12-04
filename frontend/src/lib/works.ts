@@ -40,9 +40,11 @@ export async function fetchWorks(): Promise<Work[]> {
 
 // 상세용
 export async function fetchWork(id: number | string): Promise<Work> {
-  const data = await graphqlClient.request<{ work: Work }>(QUERY_WORK_DETAIL, {
-    id,
-  });
+  const numId = typeof id === "string" ? Number(id) : id;
+  const data = await graphqlClient.request<{ work: Work }>(
+    QUERY_WORK_DETAIL,
+    { id: numId }
+  );
   return data.work;
 }
 
