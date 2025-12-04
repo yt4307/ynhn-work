@@ -49,7 +49,12 @@ export const QUERY_WORK_DETAIL = gql`
       startedAt
       endedAt
       isOngoing
-      # workLinks 같은 필드가 있으면 여기에 추가
+      links {
+        id
+        label
+        url
+        sortOrder
+      }
     }
   }
 `;

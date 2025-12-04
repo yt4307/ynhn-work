@@ -1,0 +1,261 @@
+/* 레이아웃 전체 */
+.wrapper {
+  max-width: 80rem; /* ~1280px */
+  margin: 0 auto;
+  padding: 80px 16px 96px; /* pt-20 px-4 pb-24 */
+  font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 96px 32px 96px; /* md:pt-24 md:px-8 */
+  }
+}
+
+/* 뒤로가기 링크 */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #6b7280; /* neutral-500 */
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: #111827; /* neutral-900 */
+  text-decoration: underline;
+}
+
+/* 헤더 영역 */
+.header {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2; /* heading */
+  letter-spacing: 0.005em; /* +0.5% */
+  margin: 0;
+}
+
+.summary {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.4; /* subtitle */
+  letter-spacing: -0.005em; /* -0.5% */
+  color: #4b5563; /* neutral-600에 조금 진하게 */
+}
+
+/* 상단 메타 정보 */
+.metaRow {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.5; /* body */
+  letter-spacing: -0.015em; /* -1.5% */
+  color: #6b7280; /* neutral-500 */
+}
+
+.metaDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background-color: #d1d5db; /* neutral-300 */
+}
+
+/* 상단 배지 */
+.badgesRow {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoryBadge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  background-color: #eef2ff; /* indigo-50 */
+  color: #4338ca; /* indigo-700 */
+}
+
+.statusBadge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  background-color: #f5f5f5; /* neutral-100 */
+  color: #374151; /* neutral-700 */
+}
+
+/* 외부 링크 버튼들 */
+.linksRow {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb; /* neutral-200 */
+  background-color: #ffffff;
+  font-size: 12px;
+  color: #111827;
+  text-decoration: none;
+}
+
+.linkButton:hover {
+  border-color: #fecdd3; /* rose-200 */
+  background-color: #fff1f2; /* rose-50 */
+}
+
+/* 본문 2열 레이아웃 */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  }
+}
+
+.mainCol {
+  min-width: 0;
+}
+
+.asideCol {
+  min-width: 0;
+}
+
+/* 섹션 공통 */
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+}
+
+/* 본문 텍스트 */
+.bodyText {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.bodyTextMuted {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #6b7280;
+}
+
+/* 이미지 그리드 */
+.imageGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .imageGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.imageItem {
+  overflow: hidden;
+  border-radius: 0.75rem; /* rounded-lg */
+  border: 1px solid #e5e7eb; /* neutral-200 */
+  background-color: #f5f5f5; /* neutral-100 */
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 사이드 Info 섹션 */
+.infoLabel {
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #6b7280; /* neutral-500 */
+}
+
+.infoValue {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.infoBlock {
+  margin-bottom: 16px;
+}
+
+/* 기술/태그 뱃지 */
+.techBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.techBadge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  background-color: #fff1f2; /* rose-50 */
+  color: #be123c; /* rose-700 */
+}
+
+.tagBadge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  background-color: #f5f5f5; /* neutral-100 */
+  color: #374151; /* neutral-700 */
+}
+
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
