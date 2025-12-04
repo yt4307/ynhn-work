@@ -1,5 +1,5 @@
 import { graphqlClient } from "./graphql/graphqlClient";
-import { QUERY_WORKS_FOR_HOME } from "./graphql/queries";
+import { QUERY_WORKS, QUERY_WORKS_FOR_HOME } from "./graphql/queries";
 
 export interface Work {
   id: number;
@@ -24,6 +24,13 @@ export async function fetchWorksForHome(): Promise<Work[]> {
   return data.works.slice(0, 2);
 }
 
+// /works 리스트 전체
+export async function fetchWorks(): Promise<Work[]> {
+  const data = await graphqlClient.request<{ works: Work[] }>(QUERY_WORKS);
+  return data.works;
+}
+
+// 기간 표시: "2024.01 - 진행 중" 등
 export function formatWorkPeriod(work: Work): string {
   const fmt = (iso?: string | null) => {
     if (!iso) return "";
